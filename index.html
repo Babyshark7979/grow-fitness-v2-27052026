@@ -265,6 +265,7 @@
     <button class="tab-btn active" onclick="goTab('strategy',this)">🎯 Chiến Lược & KPI</button>
     <button class="tab-btn" onclick="goTab('team',this)">👥 Đội Ngũ & Lịch</button>
     <button class="tab-btn" onclick="goTab('content',this)">📱 Nội Dung & Meta</button>
+    <button class="tab-btn" onclick="goTab('dar',this)" style="display:none;">⚡ DAR · Ra Quyết Định</button>
     <button class="tab-btn" onclick="goTab('metrics',this)">📊 Đo Lường Tuần</button>
 </nav>
 
@@ -336,7 +337,45 @@
             </div>
         </div>
 
+        <!-- KPI Calculator -->
+        <div class="card">
+            <div class="card-title"><span class="ct-icon">🧮</span> Máy Tính Ngược KPI · Kéo Slider</div>
 
+            <div class="sl-group">
+                <div class="sl-head"><span class="sl-label">🎯 Doanh thu mục tiêu/tháng</span><span class="sl-val" id="sv-rev">150M VNĐ</span></div>
+                <input type="range" id="sl-rev" min="50" max="300" value="150" step="5" oninput="kpi()">
+            </div>
+            <div class="sl-group">
+                <div class="sl-head"><span class="sl-label">💳 AOV — Giá trị đơn Core bình quân</span><span class="sl-val a" id="sv-aov">3,000,000 đ</span></div>
+                <input type="range" class="a" id="sl-aov" min="1500000" max="8000000" value="3000000" step="100000" oninput="kpi()">
+            </div>
+            <div class="sl-group">
+                <div class="sl-head"><span class="sl-label">📈 Tỷ lệ phễu → chốt Core</span><span class="sl-val a" id="sv-tc">40%</span></div>
+                <input type="range" class="a" id="sl-tc" min="10" max="70" value="40" step="5" oninput="kpi()">
+            </div>
+            <div class="sl-group">
+                <div class="sl-head"><span class="sl-label">💬 Tỷ lệ Inbox → đặt lịch phễu</span><span class="sl-val g" id="sv-ic">50%</span></div>
+                <input type="range" class="g" id="sl-ic" min="10" max="70" value="50" step="5" oninput="kpi()">
+            </div>
+            <div class="sl-group">
+                <div class="sl-head"><span class="sl-label">💸 Ngân sách Ads/tháng</span><span class="sl-val" id="sv-bud">15,000,000 đ</span></div>
+                <input type="range" id="sl-bud" min="5000000" max="50000000" value="15000000" step="500000" oninput="kpi()">
+            </div>
+
+            <div class="divider"></div>
+            <div class="rrow"><span class="rkey">Số khách Core cần chốt</span><span class="rval" id="r-core" style="color:var(--primary-light)">50 khách</span></div>
+            <div class="rrow"><span class="rkey">Số khách phễu 7–21 ngày cần</span><span class="rval" id="r-trial" style="color:var(--accent)">125 khách</span></div>
+            <div class="rrow"><span class="rkey">Số Inbox cần tạo ra/tháng</span><span class="rval" id="r-inbox" style="color:var(--green)">250 inbox</span></div>
+            <div class="rrow"><span class="rkey">CPL mục tiêu (chi phí/inbox)</span><span class="rval" id="r-cpl" style="color:var(--text-sub)">60,000 đ</span></div>
+            <div class="rrow" style="border-top:2px solid var(--border-pink);margin-top:6px;padding-top:12px;">
+                <span class="rkey" style="font-weight:700;color:var(--text)">📊 ROI Ads ước tính</span>
+                <span class="rval" id="r-roi" style="color:var(--primary-light);font-size:1rem;">10x</span>
+            </div>
+
+            <div style="margin-top:16px;padding:12px;background:rgba(192,22,94,.05);border:1px solid var(--border-pink);border-radius:8px;font-size:.72rem;color:var(--text-sub);line-height:1.5;">
+                <strong style="color:var(--primary-light);">Triết lý vận hành:</strong> Marketing không phải làm content cho đẹp — marketing thực chiến nói chuyện bằng <strong>Số liệu, KPI, Ngân sách, Chi phí/Khách hàng</strong>. Mục tiêu cuối: <strong>Khách hàng + Doanh thu.</strong>
+            </div>
+        </div>
     </div>
 
     <!-- Lộ trình 4 giai đoạn -->
@@ -582,6 +621,103 @@
                     Cảnh 3 (sau Grow Fitness): Liên váy lụa quyến rũ, <strong>chủ động bật đèn sáng lung linh</strong>. Chồng say đắm ngược lại.<br><br>
                     <em>VO: "Đầu tư vóc dáng chưa bao giờ là khoản thua lỗ của người vợ thông minh."</em>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ==============================
+     TAB 4: DAR · RA QUYẾT ĐỊNH
+================================ -->
+<div id="pane-dar" class="pane">
+    <div class="g2 mb20">
+        <!-- Financial Scenario -->
+        <div class="card">
+            <div class="card-title"><span class="ct-icon">💰</span> Mô Phỏng Tài Chính · Kéo Slider Trước Khi Chốt</div>
+            <div style="font-size:.72rem;color:var(--text-muted);margin-bottom:14px;padding:8px 12px;background:rgba(192,22,94,.05);border-left:3px solid var(--primary);border-radius:0 6px 6px 0;">
+                DAR = Decision Analysis Record · Ra quyết định bằng bộ tiêu chí + trọng số, không dùng cảm tính. Kéo slider để xem kết quả tài chính từng phương án <em>trước</em> khi chấm điểm bảng bên phải.
+            </div>
+            <div class="sl-group">
+                <div class="sl-head"><span class="sl-label">💸 Ngân sách Ads/tháng</span><span class="sl-val" id="d-bud-v">15,000,000 đ</span></div>
+                <input type="range" id="d-bud" min="5000000" max="50000000" value="15000000" step="500000" oninput="dar()">
+            </div>
+            <div class="sl-group">
+                <div class="sl-head"><span class="sl-label">💬 CPL kỳ vọng (chi phí/inbox)</span><span class="sl-val a" id="d-cpl-v">60,000 đ</span></div>
+                <input type="range" class="a" id="d-cpl" min="20000" max="200000" value="60000" step="5000" oninput="dar()">
+            </div>
+            <div class="sl-group">
+                <div class="sl-head"><span class="sl-label">📅 Tỷ lệ Inbox → Đặt lịch phễu</span><span class="sl-val g" id="d-ir-v">50%</span></div>
+                <input type="range" class="g" id="d-ir" min="10" max="80" value="50" step="5" oninput="dar()">
+            </div>
+            <div class="sl-group">
+                <div class="sl-head"><span class="sl-label">⬆️ Tỷ lệ Phễu → Up-sell Core</span><span class="sl-val" id="d-ur-v">40%</span></div>
+                <input type="range" id="d-ur" min="10" max="70" value="40" step="5" oninput="dar()">
+            </div>
+            <div class="sl-group">
+                <div class="sl-head"><span class="sl-label">💳 AOV gói Core bình quân</span><span class="sl-val a" id="d-aov-v">3,000,000 đ</span></div>
+                <input type="range" class="a" id="d-aov" min="1500000" max="8000000" value="3000000" step="100000" oninput="dar()">
+            </div>
+            <div class="divider"></div>
+            <div class="rrow"><span class="rkey">📬 Inbox kỳ vọng từ Ads</span><span class="rval" id="d-r-inbox" style="color:var(--primary-light)">250 inbox</span></div>
+            <div class="rrow"><span class="rkey">📅 Khách đặt lịch trải nghiệm</span><span class="rval" id="d-r-trial" style="color:var(--accent)">125 khách</span></div>
+            <div class="rrow"><span class="rkey">👥 Khách Core chốt được</span><span class="rval" id="d-r-core" style="color:var(--green)">50 khách</span></div>
+            <div class="rrow" style="border-top:2px solid var(--border-pink);margin-top:6px;padding-top:12px;">
+                <span class="rkey" style="font-weight:700;color:var(--text)">💰 Doanh thu dự kiến</span>
+                <span class="rval" id="d-r-rev" style="color:var(--primary-light);font-size:1.05rem;">150M VNĐ</span>
+            </div>
+        </div>
+
+        <!-- Decision Matrix -->
+        <div class="card">
+            <div class="card-title"><span class="ct-icon">⚖️</span> Ma Trận Quyết Định · Chấm điểm 1–5</div>
+            <div style="margin-bottom:10px;">
+                <div style="font-size:.7rem;color:var(--text-muted);margin-bottom:5px;">Quyết định đang phân tích:</div>
+                <textarea class="dar-note" rows="2" placeholder="VD: Phân bổ ngân sách marketing tháng 06 — chọn chiến lược chạy Ads nào?">Phân bổ 15M tháng 06: Chiến lược Marketing nào tối ưu nhất cho Grow Fitness?</textarea>
+            </div>
+            <div style="overflow-x:auto;">
+            <table class="dar-table">
+                <thead>
+                    <tr>
+                        <th style="min-width:130px;">Tiêu chí</th>
+                        <th>Trọng số<br><small style="font-weight:400;color:var(--text-muted)">(1–5)</small></th>
+                        <th>A: Quảng Cáo Thuần<br><small style="font-weight:400;color:var(--text-muted)">Facebook Ads 100%</small></th>
+                        <th>B: Tự Nhiên Thuần<br><small style="font-weight:400;color:var(--text-muted)">Seeding + Content</small></th>
+                        <th>C: Kết Hợp<br><small style="font-weight:400;color:var(--text-muted)">70% Ads + 30% Organic</small></th>
+                    </tr>
+                </thead>
+                <tbody id="dar-body"></tbody>
+                <tfoot>
+                    <tr style="background:rgba(255,255,255,.03);">
+                        <td colspan="2" style="font-weight:700;color:var(--text);">Tổng điểm có trọng số</td>
+                        <td><div class="dar-total" id="dt-a">—</div></td>
+                        <td><div class="dar-total" id="dt-b">—</div></td>
+                        <td><div class="dar-total" id="dt-c">—</div></td>
+                    </tr>
+                    <tr>
+                        <td colspan="5" id="dar-verdict" style="font-size:.76rem;font-weight:600;color:var(--accent);padding-top:10px;">← Nhập điểm để xem kết quả</td>
+                    </tr>
+                </tfoot>
+            </table>
+            </div>
+            <div style="font-size:.67rem;color:var(--text-muted);margin-top:8px;">* Trọng số 5 = quan trọng nhất · Điểm 5 = tốt nhất · Tổng = Σ(trọng số × điểm)</div>
+        </div>
+    </div>
+
+    <!-- DAR Record -->
+    <div class="card">
+        <div class="card-title"><span class="ct-icon">📋</span> Ghi Chép Quyết Định</div>
+        <div class="g3">
+            <div>
+                <div style="font-size:.7rem;color:var(--text-muted);margin-bottom:6px;">✅ Quyết định chốt (1 câu):</div>
+                <textarea class="dar-note" rows="4" placeholder="Điền sau khi xem bảng điểm và slider tài chính xong...&#10;&#10;VD: Chọn phương án C - Kết Hợp 70/30 vì điểm cao nhất (72) và doanh thu dự kiến đạt 150M với ngân sách 15M."></textarea>
+            </div>
+            <div>
+                <div style="font-size:.7rem;color:var(--text-muted);margin-bottom:6px;">⚠️ Điều kiện để quyết định đúng (Assumptions):</div>
+                <textarea class="dar-note" rows="4" placeholder="VD:&#10;- CPL thực tế ≤ 80,000đ&#10;- Liên xử lý ≥ 30 inbox/ngày&#10;- Tỷ lệ chốt phễu → Core ≥ 40%&#10;- Editor giao video đúng hạn T.4 hàng tuần"></textarea>
+            </div>
+            <div>
+                <div style="font-size:.7rem;color:var(--text-muted);margin-bottom:6px;">🔁 Khi nào phải xem lại (Review trigger):</div>
+                <textarea class="dar-note" rows="4" placeholder="VD:&#10;- Sau 14 ngày nếu CPL > 100k → xem lại&#10;- Inbox < 15/ngày sau 7 ngày → đổi nội dung quảng cáo&#10;- Tỷ lệ chốt < 25% → xem lại ưu đãi gói phễu&#10;- Doanh thu tuần 4 < 30M → họp khẩn"></textarea>
             </div>
         </div>
     </div>
@@ -860,7 +996,11 @@ Nhận xét: ${fb}
 }
 
 // ===== INIT =====
+kpi();
+dar();
+buildDAR();
 renderCL(2);
+weekScore();
 </script>
 </body>
 </html>
