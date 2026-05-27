@@ -955,22 +955,69 @@ function toggleCL(id, row) {
 // ===== WEEKLY SCORE =====
 function weekScore() {
     const v = id => +document.getElementById(id).value||0;
-    const rs = [
-        Math.min(v('m-vid')/3,1), Math.min(v('m-ads')/3.5,1),
-        Math.min(v('m-inb')/60,1), Math.min(v('m-tri')/30,1),
-        Math.min(v('m-rev')/35,1), Math.min(v('m-mre')/5,1),
-        Math.min(v('m-mph')/17,1), Math.min(v('m-mst')/7,1),
-        Math.min(v('m-mco')/14,1)
+    
+    const rev = v('m-rev');
+    const ads = v('m-ads');
+    
+    // Điểm hành vi (Content Meta) - Tối đa 30%
+    const act = [
+        Math.min(v('m-vid')/3, 1),
+        Math.min(v('m-mre')/5, 1),
+        Math.min(v('m-mph')/17, 1),
+        Math.min(v('m-mst')/7, 1),
+        Math.min(v('m-mco')/14, 1)
     ];
-    const sc = Math.round(rs.reduce((a,b)=>a+b,0)/rs.length*100);
-    document.getElementById('wscore').textContent = sc+'%';
-    document.getElementById('wbar').style.width = sc+'%';
-    let fb = sc===0 ? 'Nhập số liệu để phân tích...'
-           : sc<50  ? '⚠️ Tốc độ vận hành chậm. Tập trung làm checklist Meta để lấy Reach!'
-           : sc<85  ? '⚡ Khá tốt! Cần đăng đủ Reels (+97% reach) và chốt thêm gói phễu để đẩy nhanh doanh thu.'
-           :          '🔥 Tuyệt hảo! Vận hành chạm đỉnh thuật toán Meta. Sẵn sàng bùng nổ doanh số!';
-    const mre = v('m-mre');
-    if (mre<5 && sc>0) fb += ` (Cần thêm ${5-mre} Reels để Meta boost reach +97%!)`;
+    let scoreAct = (act.reduce((a,b)=>a+b,0) / 5) * 30;
+    
+    // Điểm phễu (Inbox & Khách thử) - Tối đa 30%
+    const funnel = [
+        Math.min(v('m-inb')/60, 1),
+        Math.min(v('m-tri')/30, 1)
+    ];
+    let scoreFunnel = (funnel.reduce((a,b)=>a+b,0) / 2) * 30;
+    
+    // Điểm Tài Chính (Ăn chắc mặc bền) - Tối đa 40% + Phạt
+    let scoreFin = 0;
+    let penalty = 0;
+    let fb = '';
+    
+    if (ads > 0) {
+        if (rev < ads) {
+            // LỖ - Báo động đỏ
+            scoreFin = 0;
+            penalty = 20; // Phạt nặng
+            fb = '🚨 BÁO ĐỘNG: Đang lỗ (Doanh thu < Tiền Ads). Tắt ngay Ads, dừng sống ảo! Tập trung chốt Sale.';
+        } else {
+            // LÃI
+            scoreFin = Math.min(rev / 35, 1) * 40;
+            if (ads > 3.5) {
+                // Tiêu lố ngân sách 3.5M
+                let overspend = (ads - 3.5) / 3.5;
+                penalty = Math.min(overspend * 10, 15);
+            }
+        }
+    } else {
+        if (rev > 0) {
+            scoreFin = Math.min(rev / 35, 1) * 40;
+        }
+    }
+    
+    let totalScore = Math.max(Math.round(scoreAct + scoreFunnel + scoreFin - penalty), 0);
+    
+    if (fb === '') {
+        if (totalScore === 0 && act.reduce((a,b)=>a+b,0) === 0) {
+            fb = 'Nhập số liệu để phân tích...';
+        } else if (totalScore < 50) {
+            fb = '⚠️ Tốc độ vận hành chậm, chưa sinh lời. Cần bám sát khách phễu để chốt Core!';
+        } else if (totalScore < 80) {
+            fb = '🔥 Khá ổn! Dòng tiền đang dương. Tăng cường chốt sale để đạt mốc 35M.';
+        } else {
+            fb = '💎 Tuyệt hảo! Có lãi tiền mặt & xây kênh tốt. Cứ đúng bài này mà nhân bản!';
+        }
+    }
+    
+    document.getElementById('wscore').textContent = totalScore + '%';
+    document.getElementById('wbar').style.width = totalScore + '%';
     document.getElementById('wfb').textContent = fb;
 }
 
