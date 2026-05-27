@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grow Fitness — Đăng Ký Trải Nghiệm</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #c0165e;
+            --primary-light: #e91e8c;
+            --bg: #0d0a0f;
+            --bg-card: rgba(255,255,255,0.04);
+            --border: rgba(255,255,255,0.08);
+            --text: rgba(255,255,255,0.92);
+            --text-sub: rgba(255,255,255,0.6);
+            --r: 12px;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { background:var(--bg); color:var(--text); font-family:'Be Vietnam Pro',sans-serif; min-height:100vh; display:flex; align-items:center; justify-content:center; padding:20px; }
+        
+        .card { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--r); padding:32px; max-width:480px; width:100%; box-shadow:0 10px 30px rgba(0,0,0,0.5); }
+        .logo { font-family:'Outfit',sans-serif; font-size:1.5rem; font-weight:800; text-align:center; margin-bottom:10px; }
+        .logo span { color:var(--primary-light); }
+        .desc { text-align:center; color:var(--text-sub); font-size:0.9rem; margin-bottom:24px; line-height:1.5; }
+        
+        .form-group { margin-bottom:16px; }
+        .form-group label { display:block; font-size:0.8rem; color:var(--text-sub); margin-bottom:6px; font-weight:500; }
+        .form-group input, .form-group select { width:100%; background:rgba(0,0,0,0.2); border:1px solid var(--border); border-radius:6px; padding:12px; color:var(--text); font-family:inherit; outline:none; transition:border 0.2s; }
+        .form-group input:focus, .form-group select:focus { border-color:var(--primary-light); }
+        
+        .btn { width:100%; background:var(--primary); color:#fff; border:none; padding:14px; border-radius:6px; font-family:inherit; font-weight:600; font-size:1rem; cursor:pointer; transition:all 0.2s; margin-top:8px; }
+        .btn:hover { background:var(--primary-light); transform:translateY(-1px); box-shadow:0 4px 12px rgba(233,30,140,0.3); }
+        .btn:disabled { opacity:0.7; cursor:not-allowed; }
+
+        .success-msg { display:none; text-align:center; padding:20px 0; }
+        .success-msg h3 { color:#10b981; margin-bottom:8px; }
+    </style>
+</head>
+<body>
+
+    <div class="card" id="form-card">
+        <div class="logo">GROW <span>FITNESS</span></div>
+        <div class="desc">Khai phóng cơ thể, kiến tạo đường cong.<br>Đăng ký ngay để nhận buổi tập đánh giá Inbody 1:1 miễn phí.</div>
+        
+        <div class="form-group">
+            <label>Họ và Tên</label>
+            <input type="text" id="cus-name" placeholder="Ví dụ: Nguyễn Văn A" required>
+        </div>
+        <div class="form-group">
+            <label>Số điện thoại Zalo</label>
+            <input type="tel" id="cus-phone" placeholder="09xxxx" required>
+        </div>
+        <div class="form-group">
+            <label>Mục tiêu tập luyện</label>
+            <select id="cus-goal">
+                <option value="Giảm mỡ">Giảm mỡ, siết cơ</option>
+                <option value="Tăng cân">Tăng cân, tăng cơ</option>
+                <option value="Sức khỏe">Cải thiện sức khỏe, gù lưng</option>
+            </select>
+        </div>
+        
+        <!-- Trường ẩn lưu mã người giới thiệu -->
+        <input type="hidden" id="ref-code" value="">
+
+        <button class="btn" id="submit-btn" onclick="submitForm()">Đăng Ký Tập Thử Miễn Phí</button>
+    </div>
+
+    <div class="card success-msg" id="success-card">
+        <h3>🎉 Đăng ký thành công!</h3>
+        <p style="color:var(--text-sub);font-size:0.9rem;">Cảm ơn bạn. Huấn luyện viên của Grow Fitness sẽ liên hệ với bạn qua Zalo trong thời gian sớm nhất để chốt lịch tập.</p>
+    </div>
+
+    <script>
+        // Tự động bắt mã người giới thiệu từ URL (ví dụ: landing.html?ref=CHILAN)
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const ref = urlParams.get('ref');
+            if (ref) {
+                document.getElementById('ref-code').value = ref;
+                console.log("Đã bắt được mã giới thiệu: " + ref);
+            }
+        };
+
+        function submitForm() {
+            const name = document.getElementById('cus-name').value;
+            const phone = document.getElementById('cus-phone').value;
+            const goal = document.getElementById('cus-goal').value;
+            const ref = document.getElementById('ref-code').value;
+
+            if(!name || !phone) {
+                alert("Vui lòng điền đủ Tên và Số điện thoại!");
+                return;
+            }
+
+            const btn = document.getElementById('submit-btn');
+            btn.textContent = '⏳ Đang gửi thông tin...';
+            btn.disabled = true;
+
+            // Ở đây sau này sếp nối chung vào cái Link Webhook Google Sheets của sếp nhé
+            // Tạm thời Fake loading 1.5s để mô phỏng
+            setTimeout(() => {
+                document.getElementById('form-card').style.display = 'none';
+                document.getElementById('success-card').style.display = 'block';
+                
+                // Demo log data:
+                console.log({ Tên: name, SĐT: phone, Mục_tiêu: goal, Mã_Giới_Thiệu: ref });
+            }, 1500);
+        }
+    </script>
+</body>
+</html>
