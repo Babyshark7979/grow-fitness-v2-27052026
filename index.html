@@ -743,7 +743,7 @@
             <div class="met-row"><span class="met-label">💬 Comments đã phản hồi</span><span class="met-target">/ 14 cmt</span><input class="met-input" type="number" id="m-mco" min="0" max="30" placeholder="0" oninput="weekScore()"></div>
             <div style="display:flex;gap:8px;margin-top:16px;">
                 <button class="btn btn-p" onclick="weekScore()">Tính Điểm</button>
-                <button class="btn btn-o" onclick="exportReport()">📋 Sao Chép Báo Cáo</button>
+                <button class="btn btn-o" onclick="pushToSheets()" style="color:var(--primary);border-color:var(--primary)">🚀 Gửi Báo Cáo Vào Excel</button>
             </div>
         </div>
 
@@ -1021,25 +1021,45 @@ function weekScore() {
     document.getElementById('wfb').textContent = fb;
 }
 
-function exportReport() {
+function pushToSheets() {
+    let webhookUrl = localStorage.getItem('sheet_webhook');
+    if (!webhookUrl) {
+        webhookUrl = prompt('Chưa có kết nối Excel! Sếp hãy dán link Webhook (Google Apps Script) vào đây nhé:');
+        if (!webhookUrl) return;
+        localStorage.setItem('sheet_webhook', webhookUrl);
+    }
+    
+    const btn = document.querySelector('button[onclick="pushToSheets()"]');
+    const oldText = btn.textContent;
+    btn.textContent = '⏳ Đang gửi...';
+    btn.disabled = true;
+
     const v = id => document.getElementById(id).value||0;
     const sc = document.getElementById('wscore').textContent;
-    const fb = document.getElementById('wfb').textContent;
-    const txt = `[BÁO CÁO KẾT QUẢ TUẦN — GROW FITNESS]
-- Video Reels: ${v('m-vid')}/3
-- Ngân sách Ads: ${v('m-ads')}M/3.5M
-- Inbox mới: ${v('m-inb')}/60
-- Khách phễu: ${v('m-tri')}/30
-- Doanh thu Core: ${v('m-rev')}M/35M
-- Meta Reels: ${v('m-mre')}/5
-- Meta Bài ảnh: ${v('m-mph')}/17
-- Meta Stories: ${v('m-mst')}/7
-- Meta Comments: ${v('m-mco')}/14
----
-Điểm vận hành: ${sc}
-Nhận xét: ${fb}
-*Gửi Antigravity phân tích và cập nhật lộ trình tuần kế tiếp.*`;
-    navigator.clipboard.writeText(txt).then(()=>alert('✅ Đã copy! Paste vào chat Antigravity là xong.'));
+    
+    const payload = {
+        date: new Date().toLocaleDateString('vi-VN'),
+        vid: v('m-vid'), ads: v('m-ads'), inb: v('m-inb'),
+        tri: v('m-tri'), rev: v('m-rev'), mre: v('m-mre'),
+        mph: v('m-mph'), mst: v('m-mst'), mco: v('m-mco'),
+        score: sc
+    };
+
+    fetch(webhookUrl, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload)
+    }).then(() => {
+        alert('🚀 Đã bắn dữ liệu thành công vào Excel!');
+    }).catch(err => {
+        alert('⚠️ Có lỗi xảy ra, sếp kiểm tra lại link Webhook nhé!');
+    }).finally(() => {
+        btn.textContent = oldText;
+        btn.disabled = false;
+    });
 }
 
 // ===== INIT =====
