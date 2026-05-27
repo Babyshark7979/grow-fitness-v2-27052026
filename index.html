@@ -1033,12 +1033,14 @@ function weekScore() {
     let totalScore = Math.max(Math.round(scoreFunnel + scoreFin - penalty), 0);
     
     if (fb === '') {
-        if (totalScore < 40) {
-            fb = '⚠️ Cảnh báo: Tốc độ ra tiền chậm. Nếu CPL cao, hãy thay video. Nếu tỷ lệ chốt Core thấp, hãy xem lại tư vấn!';
-        } else if (totalScore < 80) {
-            fb = '🔥 Tốt! Dòng tiền đang dương. Hãy tối ưu tỷ lệ chốt (Trải nghiệm → Core) để bứt phá doanh thu.';
+        if (profit <= 0) {
+            fb = '⚠️ Cảnh báo: Đang hòa vốn hoặc lỗ. Ngừng bơm Ads mới, tập trung chốt sale tệp đang có!';
+        } else if (roi < 2) {
+            fb = '🔥 Tốt! Đang có lãi nhẹ. Tối ưu lại kịch bản chốt (Trải nghiệm → Core) để kéo ROI lên > 2.0x!';
+        } else if (totalScore >= 80) {
+            fb = '💎 Tuyệt hảo! Giá vốn khách hàng (CAC) cực rẻ, lợi nhuận biên mập mạp. Bơm thêm Ads để scale!';
         } else {
-            fb = '💎 Tuyệt hảo! Giá vốn khách hàng (CAC) rất rẻ, lợi nhuận biên mập mạp. Bơm thêm Ads để scale!';
+            fb = '🔥 Khá ổn! Dòng tiền đang dương. Tiếp tục phát huy công suất.';
         }
     }
     
