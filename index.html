@@ -730,19 +730,14 @@
     <div class="g21">
         <div class="card">
             <div class="card-title"><span class="ct-icon">📊</span> Nhập Số Liệu Thực Tế Tuần Này</div>
-            <div style="font-size:.7rem;color:var(--text-muted);margin-bottom:12px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;">Chỉ số vận hành</div>
-            <div class="met-row"><span class="met-label">🎬 Video Reels hoàn thành</span><span class="met-target">/ 3 video</span><input class="met-input" type="number" id="m-vid" min="0" max="10" placeholder="0" oninput="weekScore()"></div>
-            <div class="met-row"><span class="met-label">💸 Ngân sách Ads tiêu (triệu đ)</span><span class="met-target">/ 3.5M</span><input class="met-input" type="number" id="m-ads" min="0" max="20" step=".1" placeholder="0" oninput="weekScore()"></div>
-            <div class="met-row"><span class="met-label">📬 Inbox khách hàng mới</span><span class="met-target">/ 60 inbox</span><input class="met-input" type="number" id="m-inb" min="0" max="300" placeholder="0" oninput="weekScore()"></div>
-            <div class="met-row"><span class="met-label">📅 Khách trải nghiệm gói phễu</span><span class="met-target">/ 30 khách</span><input class="met-input" type="number" id="m-tri" min="0" max="100" placeholder="0" oninput="weekScore()"></div>
-            <div class="met-row"><span class="met-label">💰 Doanh thu Core chốt (triệu đ)</span><span class="met-target">/ 35M</span><input class="met-input" type="number" id="m-rev" min="0" max="200" placeholder="0" oninput="weekScore()"></div>
-            <div style="font-size:.7rem;color:var(--text-muted);margin:14px 0 8px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;">Meta Dashboard (kiểm tra hàng ngày)</div>
-            <div class="met-row"><span class="met-label">🎬 Reels công khai đã đăng</span><span class="met-target">/ 5 Reels</span><input class="met-input" type="number" id="m-mre" min="0" max="10" placeholder="0" oninput="weekScore()"></div>
-            <div class="met-row"><span class="met-label">📸 Bài viết có ảnh</span><span class="met-target">/ 17 bài</span><input class="met-input" type="number" id="m-mph" min="0" max="30" placeholder="0" oninput="weekScore()"></div>
-            <div class="met-row"><span class="met-label">📱 Stories mới</span><span class="met-target">/ 7 Stories</span><input class="met-input" type="number" id="m-mst" min="0" max="15" placeholder="0" oninput="weekScore()"></div>
-            <div class="met-row"><span class="met-label">💬 Comments đã phản hồi</span><span class="met-target">/ 14 cmt</span><input class="met-input" type="number" id="m-mco" min="0" max="30" placeholder="0" oninput="weekScore()"></div>
-            <div style="display:flex;gap:8px;margin-top:16px;">
-                <button class="btn btn-p" onclick="weekScore()">Phân Tích Dòng Tiền & Vận Hành</button>
+            <div style="font-size:.7rem;color:var(--text-muted);margin-bottom:12px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;">Chỉ số Tài Chính & Phễu</div>
+            <div class="met-row"><span class="met-label">💸 Ngân sách Ads tiêu (triệu đ)</span><span class="met-target">/ 3.5M</span><input class="met-input" type="number" id="m-ads" min="0" max="100" step=".1" placeholder="0" oninput="weekScore()"></div>
+            <div class="met-row"><span class="met-label">📬 Inbox khách hàng mới</span><span class="met-target">/ 60 inbox</span><input class="met-input" type="number" id="m-inb" min="0" max="500" placeholder="0" oninput="weekScore()"></div>
+            <div class="met-row"><span class="met-label">📅 Khách trải nghiệm gói phễu</span><span class="met-target">/ 30 khách</span><input class="met-input" type="number" id="m-tri" min="0" max="200" placeholder="0" oninput="weekScore()"></div>
+            <div class="met-row"><span class="met-label">💰 Doanh thu Core chốt (triệu đ)</span><span class="met-target">/ 35M</span><input class="met-input" type="number" id="m-rev" min="0" max="500" placeholder="0" oninput="weekScore()"></div>
+            
+            <div style="display:flex;gap:8px;margin-top:24px;">
+                <button class="btn btn-p" onclick="weekScore()">Phân Tích Dòng Tiền & Phễu</button>
                 <button class="btn btn-o" onclick="pushToSheets()" style="color:var(--primary);border-color:var(--primary)">🚀 Gửi Báo Cáo Vào Excel</button>
             </div>
         </div>
@@ -757,18 +752,9 @@
             </div>
 
             <div class="card">
-                <div class="card-title"><span class="ct-icon">⚡</span> Ma Trận Tăng Tốc · Sửa Đổi · Loại Bỏ</div>
-                <div class="spk scale">
-                    <div class="spk-t" style="color:var(--green)">🚀 SCALE — Tăng Tốc</div>
-                    <div class="spk-d">Video ít view nhưng tỷ lệ inbox cao → Bơm Ads mạnh vào video đó ngay. Đây là content trúng insight sâu nhất.</div>
-                </div>
-                <div class="spk pivot">
-                    <div class="spk-t" style="color:var(--accent)">🔧 PIVOT — Sửa Đổi</div>
-                    <div class="spk-d">Video nhiều view không có inbox → Sửa lại 10 giây cuối, thêm CTA rõ ràng. Inbox nhiều nhưng không đặt lịch → Gọi điện chốt trực tiếp, không nhắn tin dài dòng.</div>
-                </div>
-                <div class="spk kill">
-                    <div class="spk-t" style="color:var(--primary-light)">❌ KILL — Loại Bỏ</div>
-                    <div class="spk-d">CPL > 100k kéo dài 3 ngày → Tắt Ads cũ. Tạo Ads mới loại trừ tệp đã tương tác 30 ngày. Không ném tiền vào quảng cáo bị nhàm.</div>
+                <div class="card-title"><span class="ct-icon">💼</span> Sức Khỏe Phễu & Giá Vốn (CFO)</div>
+                <div id="cfo-content">
+                    <div style="text-align:center;color:var(--text-muted);font-size:0.8rem;padding:20px 0;">Nhập số liệu bên trái để hệ thống tự động phân tích tỷ số tài chính...</div>
                 </div>
             </div>
         </div>
@@ -955,64 +941,104 @@ function toggleCL(id, row) {
 // ===== WEEKLY SCORE =====
 function weekScore() {
     const v = id => +document.getElementById(id).value||0;
-    
     const rev = v('m-rev');
     const ads = v('m-ads');
+    const inb = v('m-inb');
+    const tri = v('m-tri');
+
+    if(ads === 0 && rev === 0 && inb === 0 && tri === 0) return;
+
+    // 1. TÍNH TOÁN CÁC CHỈ SỐ TÀI CHÍNH & PHỄU (CFO METRICS)
+    const cpl = inb > 0 ? Math.round((ads * 1000000) / inb) : 0;
+    const cpt = tri > 0 ? Math.round((ads * 1000000) / tri) : 0;
     
-    // Điểm hành vi (Content Meta) - Tối đa 30%
-    const act = [
-        Math.min(v('m-vid')/3, 1),
-        Math.min(v('m-mre')/5, 1),
-        Math.min(v('m-mph')/17, 1),
-        Math.min(v('m-mst')/7, 1),
-        Math.min(v('m-mco')/14, 1)
-    ];
-    let scoreAct = (act.reduce((a,b)=>a+b,0) / 5) * 30;
+    // Giả định giá gói Core trung bình là 3 triệu (AOV) để tính số khách Core
+    const coreC = rev > 0 ? Math.round(rev / 3) : 0;
+    const cac = coreC > 0 ? Math.round((ads * 1000000) / coreC) : 0;
     
-    // Điểm phễu (Inbox & Khách thử) - Tối đa 30%
+    const rateInbTri = inb > 0 ? Math.round((tri / inb) * 100) : 0;
+    const rateTriCore = tri > 0 ? Math.round((coreC / tri) * 100) : 0;
+    
+    const profit = rev - ads;
+    const roi = ads > 0 ? (rev / ads).toFixed(2) : (rev > 0 ? '∞' : '0.00');
+
+    // 2. RENDER CFO DASHBOARD
+    const fmtMoney = n => n.toLocaleString('vi-VN') + ' đ';
+    let cfoHtml = `
+        <div style="display:flex;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.05);padding-bottom:12px;margin-bottom:12px;">
+            <div>
+                <div style="font-size:0.75rem;color:var(--text-sub);">Lợi Nhuận Gộp (Gross)</div>
+                <div style="font-size:1.1rem;font-weight:700;color:${profit > 0 ? 'var(--green)' : 'var(--primary-light)'}">${profit > 0 ? '+' : ''}${profit.toFixed(1)}M VNĐ</div>
+            </div>
+            <div style="text-align:right;">
+                <div style="font-size:0.75rem;color:var(--text-sub);">ROI (Tỷ suất sinh lời)</div>
+                <div style="font-size:1.1rem;font-weight:700;color:${roi >= 2 ? 'var(--green)' : 'var(--text)'}">${roi}x</div>
+            </div>
+        </div>
+        
+        <div style="margin-bottom:16px;">
+            <div style="font-size:0.75rem;color:var(--accent);font-weight:700;margin-bottom:6px;">📈 TỶ LỆ CHUYỂN ĐỔI (SỨC KHỎE PHỄU)</div>
+            <div style="display:flex;gap:10px;">
+                <div style="flex:1;background:rgba(255,255,255,0.03);padding:8px;border-radius:6px;text-align:center;">
+                    <div style="font-size:0.7rem;color:var(--text-sub);">Inbox → Trải Nghiệm</div>
+                    <div style="font-size:1rem;font-weight:700;color:${rateInbTri >= 50 ? 'var(--green)' : 'var(--primary-light)'}">${rateInbTri}%</div>
+                </div>
+                <div style="flex:1;background:rgba(255,255,255,0.03);padding:8px;border-radius:6px;text-align:center;">
+                    <div style="font-size:0.7rem;color:var(--text-sub);">Trải Nghiệm → Core</div>
+                    <div style="font-size:1rem;font-weight:700;color:${rateTriCore >= 40 ? 'var(--green)' : 'var(--primary-light)'}">${rateTriCore}%</div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <div style="font-size:0.75rem;color:var(--green);font-weight:700;margin-bottom:6px;">💸 GIÁ VỐN KHÁCH HÀNG (UNIT ECONOMICS)</div>
+            <div class="rrow"><span class="rkey">CPL (Giá 1 tin nhắn)</span><span class="rval" style="color:${cpl <= 60000 ? 'var(--green)' : 'var(--primary-light)'}">${fmtMoney(cpl)}</span></div>
+            <div class="rrow"><span class="rkey">Cost per Trial (Giá 1 khách đến rạp)</span><span class="rval">${fmtMoney(cpt)}</span></div>
+            <div class="rrow"><span class="rkey">CAC (Giá chốt 1 khách Core)</span><span class="rval" style="color:var(--accent);font-weight:700">${fmtMoney(cac)}</span></div>
+        </div>
+    `;
+    document.getElementById('cfo-content').innerHTML = cfoHtml;
+
+    // 3. TÍNH ĐIỂM (KIỂU 1: CASHFLOW FIRST)
+    // Điểm Phễu (50%)
     const funnel = [
-        Math.min(v('m-inb')/60, 1),
-        Math.min(v('m-tri')/30, 1)
+        Math.min(inb / 60, 1),
+        Math.min(tri / 30, 1)
     ];
-    let scoreFunnel = (funnel.reduce((a,b)=>a+b,0) / 2) * 30;
+    let scoreFunnel = (funnel.reduce((a,b)=>a+b,0) / 2) * 50;
     
-    // Điểm Tài Chính (Ăn chắc mặc bền) - Tối đa 40% + Phạt
+    // Điểm Tài Chính (50% + Phạt)
     let scoreFin = 0;
     let penalty = 0;
     let fb = '';
     
     if (ads > 0) {
         if (rev < ads) {
-            // LỖ - Báo động đỏ
             scoreFin = 0;
-            penalty = 20; // Phạt nặng
-            fb = '🚨 BÁO ĐỘNG: Đang lỗ (Doanh thu < Tiền Ads). Tắt ngay Ads, dừng sống ảo! Tập trung chốt Sale.';
+            penalty = 30; // Phạt rất nặng vì LỖ
+            fb = '🚨 BÁO ĐỘNG ĐỎ: Đang lỗ (Tiền thu về < Tiền Ads). Tắt Ads ngay lập tức! Kiểm tra lại khâu chốt Sale tại rạp.';
         } else {
-            // LÃI
-            scoreFin = Math.min(rev / 35, 1) * 40;
+            scoreFin = Math.min(rev / 35, 1) * 50;
             if (ads > 3.5) {
-                // Tiêu lố ngân sách 3.5M
                 let overspend = (ads - 3.5) / 3.5;
                 penalty = Math.min(overspend * 10, 15);
             }
         }
     } else {
         if (rev > 0) {
-            scoreFin = Math.min(rev / 35, 1) * 40;
+            scoreFin = Math.min(rev / 35, 1) * 50;
         }
     }
     
-    let totalScore = Math.max(Math.round(scoreAct + scoreFunnel + scoreFin - penalty), 0);
+    let totalScore = Math.max(Math.round(scoreFunnel + scoreFin - penalty), 0);
     
     if (fb === '') {
-        if (totalScore === 0 && act.reduce((a,b)=>a+b,0) === 0) {
-            fb = 'Nhập số liệu để phân tích...';
-        } else if (totalScore < 50) {
-            fb = '⚠️ Tốc độ vận hành chậm, chưa sinh lời. Cần bám sát khách phễu để chốt Core!';
+        if (totalScore < 40) {
+            fb = '⚠️ Cảnh báo: Tốc độ ra tiền chậm. Nếu CPL cao, hãy thay video. Nếu tỷ lệ chốt Core thấp, hãy xem lại tư vấn!';
         } else if (totalScore < 80) {
-            fb = '🔥 Khá ổn! Dòng tiền đang dương. Tăng cường chốt sale để đạt mốc 35M.';
+            fb = '🔥 Tốt! Dòng tiền đang dương. Hãy tối ưu tỷ lệ chốt (Trải nghiệm → Core) để bứt phá doanh thu.';
         } else {
-            fb = '💎 Tuyệt hảo! Có lãi tiền mặt & xây kênh tốt. Cứ đúng bài này mà nhân bản!';
+            fb = '💎 Tuyệt hảo! Giá vốn khách hàng (CAC) rất rẻ, lợi nhuận biên mập mạp. Bơm thêm Ads để scale!';
         }
     }
     
@@ -1034,14 +1060,14 @@ function pushToSheets() {
     btn.textContent = '⏳ Đang gửi...';
     btn.disabled = true;
 
-    const v = id => document.getElementById(id).value||0;
+    const v = id => document.getElementById(id) ? +document.getElementById(id).value : 0;
     const sc = document.getElementById('wscore').textContent;
     
     const payload = {
         date: new Date().toLocaleDateString('vi-VN'),
         vid: v('m-vid'), ads: v('m-ads'), inb: v('m-inb'),
-        tri: v('m-tri'), rev: v('m-rev'), mre: v('m-mre'),
-        mph: v('m-mph'), mst: v('m-mst'), mco: v('m-mco'),
+        tri: v('m-tri'), rev: v('m-rev'), mre: 0,
+        mph: 0, mst: 0, mco: 0,
         score: sc
     };
 
