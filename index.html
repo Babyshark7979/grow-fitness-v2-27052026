@@ -36,13 +36,53 @@
 
         .success-msg { display:none; text-align:center; padding:20px 0; }
         .success-msg h3 { color:#10b981; margin-bottom:8px; }
+
+        .quick-links { margin-bottom: 24px; display: flex; flex-direction: column; gap: 12px; }
+        .link-btn { display: block; padding: 16px; border-radius: 12px; text-decoration: none; text-align: center; border: 1px solid var(--border); transition: all 0.3s; }
+        .link-btn:hover { transform: translateY(-2px); }
+        .link-btn strong { display: block; font-family: 'Outfit', sans-serif; font-size: 1.6rem; font-weight: 800; font-style: italic; letter-spacing: 1px; margin-bottom: 4px; }
+        .link-btn .sub-text { display: block; font-size: 0.9rem; color: rgba(255,255,255,0.8); }
+        
+        .link-zalo { background: rgba(0, 104, 255, 0.1); border-color: rgba(0, 104, 255, 0.3); }
+        .link-zalo strong { color: #fff; }
+        .link-zalo strong span { color: #0068ff; }
+        .link-zalo:hover { background: rgba(0, 104, 255, 0.2); box-shadow: 0 4px 15px rgba(0, 104, 255, 0.2); }
+
+        .link-fitness { background: rgba(233, 30, 140, 0.1); border-color: rgba(233, 30, 140, 0.3); }
+        .link-fitness strong { color: #fff; }
+        .link-fitness strong span { color: #e91e8c; }
+        .link-fitness:hover { background: rgba(233, 30, 140, 0.2); box-shadow: 0 4px 15px rgba(233, 30, 140, 0.2); }
+
+        .link-healthy { background: rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.3); }
+        .link-healthy strong { color: #fff; }
+        .link-healthy strong span { color: #10b981; }
+        .link-healthy:hover { background: rgba(16, 185, 129, 0.2); box-shadow: 0 4px 15px rgba(16, 185, 129, 0.2); }
+
+        .divider { border: 0; border-top: 1px solid var(--border); margin: 24px 0; }
     </style>
 </head>
 <body>
 
     <div class="card" id="form-card">
-        <div class="logo">GROW <span>FITNESS</span></div>
-        <div class="desc">Khai phóng cơ thể, kiến tạo đường cong.<br>Đăng ký ngay để nhận buổi tập đánh giá Inbody 1:1 miễn phí.</div>
+        <div class="quick-links">
+            <a href="https://zalo.me/g/gvil0jl3e0edtonv2khk" target="_blank" class="link-btn link-zalo">
+                <strong>GROW <span>COMMUNITY</span></strong>
+                <span class="sub-text">Tham gia nhóm tập online miễn phí</span>
+            </a>
+            <a href="https://www.facebook.com/Growfitness" target="_blank" class="link-btn link-fitness">
+                <strong>GROW <span>FITNESS</span></strong>
+                <span class="sub-text">Thử thách 21 ngày Lấy lại vóc dáng hoàng kim 599k</span>
+            </a>
+            <a href="https://www.facebook.com/anngongiudangoceanpark" target="_blank" class="link-btn link-healthy">
+                <strong>GROW <span>HEALTHY</span></strong>
+                <span class="sub-text">Thực đơn 21 ngày Ăn ngon giữ dáng ngọc ngà</span>
+            </a>
+        </div>
+
+        <hr class="divider">
+
+        <div class="logo">GROW <span>ĐĂNG KÝ</span></div>
+        <div class="desc">Điền thông tin bên dưới để đăng ký các dịch vụ phù hợp với nhu cầu của bạn.</div>
         
         <div class="form-group">
             <label>Họ và Tên</label>
@@ -55,16 +95,17 @@
         <div class="form-group">
             <label>Mục tiêu tập luyện</label>
             <select id="cus-goal">
-                <option value="Giảm mỡ">Giảm mỡ, siết cơ</option>
-                <option value="Tăng cân">Tăng cân, tăng cơ</option>
-                <option value="Sức khỏe">Cải thiện sức khỏe, gù lưng</option>
+                <option value="Cần bữa ăn giảm mỡ">Cần bữa ăn giảm mỡ</option>
+                <option value="Tập miễn phí">Tập miễn phí</option>
+                <option value="Coaching 1:1">Coaching 1:1</option>
+                <option value="Lên giáo trình ăn kèm mục tiêu">Lên giáo trình ăn kèm mục tiêu</option>
             </select>
         </div>
         
         <!-- Trường ẩn lưu mã người giới thiệu -->
         <input type="hidden" id="ref-code" value="">
 
-        <button class="btn" id="submit-btn" onclick="submitForm()">Đăng Ký Tập Thử Miễn Phí</button>
+        <button class="btn" id="submit-btn" onclick="submitForm()">Đăng Ký Ngay</button>
     </div>
 
     <div class="card success-msg" id="success-card">
