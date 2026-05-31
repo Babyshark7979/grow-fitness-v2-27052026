@@ -139,15 +139,39 @@
             btn.textContent = '⏳ Đang gửi thông tin...';
             btn.disabled = true;
 
-            // Ở đây sau này sếp nối chung vào cái Link Webhook Google Sheets của sếp nhé
-            // Tạm thời Fake loading 1.5s để mô phỏng
-            setTimeout(() => {
+            // Link Webhook Google Apps Script - Giang sẽ điền vào đây sau
+            const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby_PLACEHOLDER/exec"; 
+
+            if(SCRIPT_URL.includes("PLACEHOLDER")) {
+                // Chế độ demo khi sếp chưa có link thật
+                setTimeout(() => {
+                    document.getElementById('form-card').style.display = 'none';
+                    document.getElementById('success-card').style.display = 'block';
+                }, 1500);
+                return;
+            }
+
+            // Gửi data thật bằng no-cors để tránh lỗi bảo mật trình duyệt
+            const data = new FormData();
+            data.append('Tên', name);
+            data.append('SĐT', phone);
+            data.append('Mục_tiêu', goal);
+            data.append('Mã_Giới_Thiệu', ref);
+
+            fetch(SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                body: data
+            })
+            .then(() => {
                 document.getElementById('form-card').style.display = 'none';
                 document.getElementById('success-card').style.display = 'block';
-                
-                // Demo log data:
-                console.log({ Tên: name, SĐT: phone, Mục_tiêu: goal, Mã_Giới_Thiệu: ref });
-            }, 1500);
+            })
+            .catch(err => {
+                alert("Có lỗi xảy ra, vui lòng thử lại!");
+                btn.textContent = 'Đăng Ký Ngay';
+                btn.disabled = false;
+            });
         }
     </script>
 </body>
